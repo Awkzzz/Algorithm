@@ -73,5 +73,5 @@ int main()
 	else
 		cout << "此人在晒网" << endl;
 	system("pause");
-    return 0;
+        return 0;
 }
