@@ -1,0 +1,57 @@
+//Node struct without element "Father"
+struct Node{
+    int num;
+    Node *LChild;
+    Node *RChild;
+};
+
+int  Init(Node *a, Node *b, vector<int> val, int &i)
+{
+    a->num = val[i];
+    if(a->num==0)
+    {
+        if(a==b->LChild)
+        {
+            b->LChild=NULL;
+        }
+        if(a==b->RChild)
+        {
+            b->RChild=NULL;
+        }
+        ++i;
+        return 0;
+    }
+    else
+    {
+        ++i;
+        b = a;
+        a->LChild=new Node;
+        a->RChild=new Node;
+        Init(a->LChild, b, val, i);
+        Init(a->RChild, b, val, i);
+    }
+}
+
+void PreView(Node *a)
+{
+    if(NULL != a)
+    {
+        cout<<a->num<<endl;
+        PreView(a->LChild);
+        PreView(a->RChild);
+    } else
+        return;
+}
+
+int main() {
+    Node *a=new Node;
+    Node *b=new Node;
+    vector<int> val = {2,1,0,0,3,0,0};
+    int i = 0;
+    a->LChild=new Node;
+    a->RChild=new Node;
+    Init(a, b, val, i);
+    cout<<"PreView"<<endl;
+    PreView(a);
+    return 0;
+}
