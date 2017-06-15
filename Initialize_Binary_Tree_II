@@ -48,8 +48,6 @@ int main() {
     Node *b=new Node;
     vector<int> val = {2,1,0,0,3,0,0};
     int i = 0;
-    a->LChild=new Node;
-    a->RChild=new Node;
     Init(a, b, val, i);
     cout<<"PreView"<<endl;
     PreView(a);
