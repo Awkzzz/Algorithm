@@ -1,22 +1,23 @@
 //Node struct without element "Father"
-struct Node{
-    int num;
-    Node *LChild;
-    Node *RChild;
+struct TreeNode{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-int  Init(Node *a, Node *b, vector<int> val, int &i)
+int  Init(TreeNode *a, TreeNode *b, vector<int> val, int &i)
 {
-    a->num = val[i];
-    if(a->num==0)
+    a->val = val[i];
+    if(a->val==0)
     {
-        if(a==b->LChild)
+        if(a==b->left)
         {
-            b->LChild=NULL;
+            b->left=NULL;
         }
-        if(a==b->RChild)
+        if(a==b->right)
         {
-            b->RChild=NULL;
+            b->right=NULL;
         }
         ++i;
         return 0;
@@ -25,27 +26,28 @@ int  Init(Node *a, Node *b, vector<int> val, int &i)
     {
         ++i;
         b = a;
-        a->LChild=new Node;
-        a->RChild=new Node;
-        Init(a->LChild, b, val, i);
-        Init(a->RChild, b, val, i);
+        a->left=new TreeNode(0);
+        a->right=new TreeNode(0);
+        Init(a->left, b, val, i);
+        Init(a->right, b, val, i);
     }
 }
 
-void PreView(Node *a)
+void PreView(TreeNode *a)
 {
     if(NULL != a)
     {
-        cout<<a->num<<endl;
-        PreView(a->LChild);
-        PreView(a->RChild);
+        cout<<a->val<<endl;
+        PreView(a->left);
+        PreView(a->right);
     } else
         return;
 }
 
+
 int main() {
-    Node *a=new Node;
-    Node *b=new Node;
+    TreeNode *a=new TreeNode(0);
+    TreeNode *b=new TreeNode(0);
     vector<int> val = {2,1,0,0,3,0,0};
     int i = 0;
     Init(a, b, val, i);
