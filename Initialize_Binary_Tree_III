@@ -5,7 +5,7 @@ struct TreeNode{
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-int  Init(TreeNode *a, TreeNode *b, vector<string> val, int &i)
+int Init(TreeNode *a, TreeNode *b, vector<string> val, int &i)
 {
     if(val[i] == "#")
     {
