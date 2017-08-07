@@ -1,0 +1,58 @@
+class nQueenProblem{
+private:
+    const int nq = 4;
+    vector<int> nqueen;
+    void print();
+    bool check_pos_valid(int index_r, int loop_r);
+public:
+    nQueenProblem():nqueen(nq, 0){};
+    int cnt = 0;
+    void findqueen(int index_r);
+};
+
+void nQueenProblem::print() {
+    for (int outer = 0; outer < nq; ++outer) {
+        for (int inner = 0; inner < nqueen[outer]; ++inner)
+            cout << "* ";
+        cout << "# ";
+        for(int inner = nqueen[outer] + 1; inner < nq; ++inner)
+            cout << "* ";
+        cout << endl;
+    }
+    cout << "--------------------------" << endl;
+}
+
+bool nQueenProblem::check_pos_valid(int index_r, int loop_r) {
+    for(int index = 0; index < index_r; ++index) {
+        int data = nqueen[index];
+
+        if(data == loop_r)
+            return false;
+        if((data - index) == (loop_r -index_r) || (data + index) == (loop_r + index_r))
+            return false;
+    }
+    return true;
+}
+
+void nQueenProblem::findqueen(int index_r) {
+    for(int loop_r = 0; loop_r < nq; ++loop_r) {
+        if(check_pos_valid(index_r, loop_r)) {
+            nqueen[index_r] = loop_r;
+            if(index_r == (nq - 1)) {
+                ++cnt;
+                print();
+                nqueen[index_r] = 0;
+                return;
+            }
+            findqueen(index_r + 1);
+            nqueen[index_r] = 0;
+        }
+    }
+}
+
+int main(int argc, char * argv[]) {
+    nQueenProblem a;
+    a.findqueen(0);
+    cout << a.cnt << endl;
+    return 0;
+}
