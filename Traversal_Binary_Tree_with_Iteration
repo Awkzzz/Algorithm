@@ -1,0 +1,81 @@
+// Pre-Order Traversal
+void PreOrderTraversal(TreeNode* root) {
+    stack<TreeNode*> s;
+    TreeNode* Cur = root;
+
+    while(Cur || !s.empty()) {
+        cout << Cur->val;
+        s.push(Cur);
+        Cur = Cur->left;
+
+        while(!Cur && !s.empty()) {
+            Cur = s.top();
+            s.pop();
+            Cur = Cur->right;
+        }
+    }
+}
+
+// In_order Traversal
+void InOrderTraversal(TreeNode* root) {
+    stack<TreeNode*> s;
+    TreeNode* Cur = root;
+
+    while(Cur != nullptr || !s.empty()) {
+        if(Cur->left != nullptr) {
+            s.push(Cur);
+            Cur = Cur->left;
+        }
+        else {
+            cout << Cur->val << " ";
+            Cur = Cur->right;
+            while(Cur == nullptr && !s.empty()) {
+                cout << s.top()->val << " ";
+                Cur = s.top();
+                s.pop();
+                Cur = Cur->right;
+            }
+        }
+    }
+}
+
+// Post_Order Traversal
+void PostOrderTraversal(TreeNode* root) {
+    stack<TreeNode*> s;
+    TreeNode* Pre = nullptr;
+    TreeNode* Cur;
+
+    s.push(root);
+
+    while(!s.empty()) {
+        Cur = s.top();
+        if((Cur->left == nullptr && Cur->right == nullptr) ||
+                (Pre != nullptr && (Cur->left == Pre || Cur->right == Pre))) {
+            cout << Cur->val << " ";
+            s.pop();
+            Pre = Cur;
+        }
+        else {
+            if(Cur->right != nullptr)
+                s.push(Cur->right);
+            if(Cur->left != nullptr)
+                s.push(Cur->left);
+        }
+    }
+}
+
+// Level-Order Traversal
+void LevelOrderTraversal(TreeNode* root) {
+    queue<TreeNode*> q;
+    q.push(root);
+
+    while(!q.empty()) {
+        cout << q.front()->val << " ";
+        TreeNode* Cur = q.front();
+        q.pop();
+        if(Cur->left != nullptr)
+            q.push(Cur->left);
+        if(Cur->right != nullptr)
+            q.push(Cur->right);
+    }
+}
