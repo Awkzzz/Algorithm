@@ -1,3 +1,4 @@
+// Node struct without element "Father"
 struct TreeNode{
     int val;
     TreeNode *left;
